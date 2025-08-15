@@ -102,6 +102,7 @@
   --chart-5: hsl(340 75% 55%);
 }
 
+
 @layer base {
   * {
     @apply border-border;
@@ -133,5 +134,22 @@
     max-width: 1400px;
   }
 }
+
+@keyframes gradient-x {
+  0%,
+  100%{
+    background-size: 200% 100%;
+    background-position: left center;
+  }
+  50%{
+    background-size: 200% 100%;
+    background-position: right center;
+  }
+}
+
+.animate-gradient-x{
+  animation: gradient-x 3s ease infinite
+}
+
 
 
