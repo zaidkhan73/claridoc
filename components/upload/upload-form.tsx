@@ -61,7 +61,8 @@ export default function UploadForm() {
           }
   
           const result = await generatePdfSummary(res)
-          console.log({result})
+          console.log('resut:', {result})
+          
   
           const {data=null, message=null} = result || {}
   
@@ -69,10 +70,12 @@ export default function UploadForm() {
             toast("saving pdf...")
           }
           formRef.current?.reset()
+          setIsLoading(false)
           
         } catch (error) {
           setIsLoading(true)
           console.log('Error occured while submitting ', error);
+          setIsLoading(false)
           formRef.current?.reset()
         }
     }

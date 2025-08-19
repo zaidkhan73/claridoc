@@ -47,15 +47,17 @@ export async function generatePdfSummary(
       console.log("summary : ", { summary });
     } catch (error) {
       console.log(error);
-      if(error instanceof Error && error.message === 'RATE_LIMIT_EXCEEDED'){
+      if(error instanceof Error && error.message === 'RATE_LIMIT_EXCEEDED of OpenAI'){
         try {
-          
+          console.log("1111111111111111111111111111111111111")
+          summary = await generateSummaryFromGeminiAI(pdfText);
+      console.log("summary : ", { summary });
         } catch (geminiError) {
           console.error("Gimini API Failed", geminiError)
         }
         throw new Error('Failed to generate summary')
       }
-      summary = await generateSummaryFromGeminiAI(pdfText);
+      
     }
 
     if (!summary) {
