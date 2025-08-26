@@ -92,7 +92,8 @@ export default function UploadForm() {
             fileName: file.name,
           });
           toast('summary stored in db')
-          router.push(`/summaries/${storeResult.data.id}`)
+          console.log("store result: ",storeResult)
+          //router.push(`/summaries/${storeResult.data.id}`)
         }
         
       }

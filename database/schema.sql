@@ -40,7 +40,7 @@ create table payment(
 create or replace function update_updated_at_column()
 return trigger as $$
 begin
-  new.updated_at = current_timestamp;
+  new.updatedAt = current_timestamp;
   return new;
 end;
 $$ language 'plpgsql'

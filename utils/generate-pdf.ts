@@ -9,8 +9,8 @@ import { getDbConnection } from "@/lib/db";
 import { toast } from "sonner";
 import { revalidatePath } from "next/cache";
 
-interface pdfSummary{
-    userId?: string;
+interface pdfSummary {
+  userId?: string;
   fileUrl: string;
   summary: string;
   title: string;
@@ -59,18 +59,19 @@ export async function generatePdfSummary(
       console.log("summary : ", { summary });
     } catch (error) {
       console.log(error);
-      if(error instanceof Error && error.message === 'RATE_LIMIT_EXCEEDED of OpenAI'){
+      if (
+        error instanceof Error &&
+        error.message === "RATE_LIMIT_EXCEEDED of OpenAI"
+      ) {
         try {
-          console.log("1111111111111111111111111111111111111")
+          //console.log("1111111111111111111111111111111111111")
           summary = await generateSummaryFromGeminiAI(pdfText);
-      console.log("summary : ", { summary });
+          console.log("summary : ", { summary });
         } catch (geminiError) {
-          console.error("Gimini API Failed", geminiError)
-          throw new Error('Failed to generate summary')
+          console.error("Gimini API Failed", geminiError);
+          throw new Error("Failed to generate summary");
         }
-        
       }
-      
     }
 
     if (!summary) {
@@ -81,7 +82,7 @@ export async function generatePdfSummary(
       };
     }
 
-    const formattedFileName = formatFileNameAsTitle(fileName)
+    const formattedFileName = formatFileNameAsTitle(fileName);
 
     return {
       success: true,
@@ -124,15 +125,12 @@ export async function storePdfSummary({
       fileName,
     });
 
-    if(!savedSummary){
-        return {
+    if (!savedSummary) {
+      return {
         success: false,
         message: "failed to save pdf summary, please try again",
       };
     }
-    toast('huraayyyyyy')
-
-    
   } catch (error) {
     return {
       success: false,
@@ -141,16 +139,15 @@ export async function storePdfSummary({
     };
   }
 
-  revalidatePath(`/summaries/${savedSummary.id}`)
+  revalidatePath(`/summaries/${savedSummary.id}`);
 
-
-  return{
-        success: true,
-        message: 'PDF summary saved successfully',
-        data:{
-          id:savedSummary.id,
-        }
-    }
+  return {
+    success: true,
+    message: "PDF summary saved successfully",
+    data: {
+      id: savedSummary.id,
+    },
+  };
 }
 
 async function savedPdfSummary({
@@ -168,7 +165,7 @@ async function savedPdfSummary({
 }) {
   try {
     const sql = await getDbConnection();
-    const result = await sql`INSERT INTO pdf_summaries (
+    const [savedSummary] = await sql`INSERT INTO pdf_summaries (
               user_id,
               original_file_url,
               summary_text,
@@ -181,9 +178,11 @@ async function savedPdfSummary({
               ${summary},
               ${title},
               ${fileName}
-
-            );`;
-            return result[0]
+           
+            )
+              RETURNING id, summary_text
+              ;`;
+    return savedSummary;
   } catch (error) {
     console.error("Error saving PDF summary", error);
     throw error;
