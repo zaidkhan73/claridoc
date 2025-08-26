@@ -1,3 +1,4 @@
+'use client'
 import BgGradient from "@/components/common/bg-gradient";
 import CtaSection from "@/components/home/cta-section";
 import DemoSection from "@/components/home/demo-section";

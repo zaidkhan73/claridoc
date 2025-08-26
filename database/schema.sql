@@ -43,7 +43,7 @@ begin
   new.updated_at = current_timestamp;
   return new;
 end;
-$$ language 'plpsql'
+$$ language 'plpgsql'
 
 --add triggers to update updated_at
 create trigger update_users_updated_at
