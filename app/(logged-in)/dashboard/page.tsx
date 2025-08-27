@@ -17,7 +17,7 @@ export default async function DashboardPage() {
 
   const uploadLimit = 5;
   const summaries = await getSummaries(userId);
-  console.log("summariesss: ", summaries);
+  //console.log("summariesss: ", summaries);
   //console.log(Object.keys(summaries[0]));
   return (
     <main className="min-h-screen">
