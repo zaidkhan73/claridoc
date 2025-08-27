@@ -20,8 +20,8 @@ export default async function DashboardPage() {
   //console.log("summariesss: ", summaries);
   //console.log(Object.keys(summaries[0]));
   return (
-    <main className="min-h-screen">
-      <BgGradient className="from-emarald-200 via-teal-200 to-cyan-200" />
+    <main className="min-h-screen ">
+      <BgGradient className="bg-background" />
       <div className="container mx-auto flex flex-col gap-4">
         <div className="px-2 py-12 sm:py-24">
           <div className="flex gap-4 mb-8 justify-between">

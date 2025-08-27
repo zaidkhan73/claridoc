@@ -24,7 +24,7 @@ export default async function SummaryPage(props: {
   const readingTime = Math.ceil((word_count || 0) / 200);
 
   return (
-    <div className="relative isolate min-h-screen bg-gradient-to-b from-rose-50/40 to-white">
+    <div className="relative isolate min-h-screen bg-background from-rose-50/40 to-white">
       <BgGradient className="from-rose-400 via-rose-300 to-orange-200" />
       
       <div className="container mx-auto flex flex-col gap-4 px-3 sm:px-6 lg:px-8 py-4 sm:py-8">
@@ -52,7 +52,7 @@ export default async function SummaryPage(props: {
         {/* Summary Card */}
         <div className="relative mt-4 sm:mt-8">
           <div
-            className="relative p-3 sm:p-6 lg:p-8 bg-white/80 backdrop-blur-md rounded-xl sm:rounded-2xl shadow-lg border border-rose-100/30 transition-all duration-300 hover:shadow-xl hover:bg-white/90 max-w-4xl mx-auto w-full"
+            className="relative p-3 sm:p-6 lg:p-8 bg-background/80 backdrop-blur-md rounded-xl sm:rounded-2xl shadow-lg border border-rose-100/30 transition-all duration-300 hover:shadow-xl hover:bg-background/90 max-w-4xl mx-auto w-full"
           >
             {/* Background overlay */}
             <div
@@ -61,7 +61,7 @@ export default async function SummaryPage(props: {
 
             {/* Word count badge */}
             <div
-              className="absolute top-2 right-2 sm:top-4 sm:right-4 flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs md:text-sm text-muted-foreground bg-white/90 px-2 sm:px-3 py-1 rounded-full shadow-sm"
+              className="absolute top-2 right-2 sm:top-4 sm:right-4 flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs md:text-sm text-muted-foreground bg-background/90 px-2 sm:px-3 py-1 rounded-full shadow-sm"
             >
               <FileText className="h-3 w-3 sm:h-4 sm:w-4 text-rose-400" />
               {word_count?.toLocaleString()} words

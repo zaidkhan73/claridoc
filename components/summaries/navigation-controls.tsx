@@ -40,7 +40,7 @@ export function NavigationControls({
           <div 
             className={cn(
               "flex gap-1 xs:gap-1.5 sm:gap-2 items-center",
-              totalSections > 8 && "overflow-x-auto scrollbar-hide max-w-full px-1"
+              totalSections > 8 && "overflow-hidden scrollbar-hide max-w-full px-1"
             )}
             style={{
               scrollSnapType: totalSections > 8 ? "x mandatory" : undefined,

@@ -28,7 +28,7 @@ const steps: Step[] = [
 
 export default function HowItWorksSection() {
   return (
-    <section className="relative overflow-hidden bg-gray-50">
+    <section className="relative overflow-hidden  bg-background">
       <div className="py-12 lg:py-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 ">
         <div
           aria-hidden="true"
@@ -69,7 +69,7 @@ export default function HowItWorksSection() {
 
 function StepItem({ icon, label, description }: Step) {
   return (
-    <div className="relative p-6 rounded-2xl bg-white/5 backdrop-blur-xs border border-white/10 hover:border-rose-500/50 transition-colors group w-full">
+    <div className="relative p-6 rounded-2xl bg-background/5 backdrop-blur-xs border border-white/10 hover:border-rose-500/50 transition-colors group w-full">
       <div className="flex flex-col gap-4 h-full">
         <div className="flex items-center justify-center h-24 w-24 mx-auto rounded-2xl bg-linear-to-br from-rose-500/10 to-transparent group-hover:from-rose-500/20 transition-colors">
           <div className="text-rose-500">{icon}</div>
