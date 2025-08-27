@@ -16,22 +16,26 @@ export function NavigationControls({
   onSectionSelect: (index: number) => void;
 }) {
   return (
-    <div className="absolute bottom-0 left-0 right-0 p-4 bg-background/80 backdrop-blur-xs border-t border-rose-500/10">
-      <div className="flex justify-between items-center">
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={onPrevious}
-          disabled={currentSection === 0}
-          className={cn(
-            "rounded-full w-12 h-12 transition-all duration-200 bg-linear-to-br from-rose-500 to-rose-600 backdrop-blur-xs border border-rose-500/10",
-            currentSection === 0 ? "opacity-50" : "hover:bg-rose-500/20"
-          )}
-        >
-          <ChevronLeft className="h-6 w-6" />
-        </Button>
+    <div className="absolute bottom-0 left-0 right-0 p-2 sm:p-4 bg-background/80 backdrop-blur-xs border-t border-rose-500/10">
+      <div className="grid grid-cols-3 items-center">
+        {/* Previous Button */}
+        <div className="flex justify-start">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onPrevious}
+            disabled={currentSection === 0}
+            className={cn(
+              "flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full transition-all duration-200 bg-gradient-to-br from-rose-500 to-rose-600 backdrop-blur-xs border border-rose-500/10",
+              currentSection === 0 ? "opacity-50" : "hover:opacity-80"
+            )}
+          >
+            <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
+          </Button>
+        </div>
 
-        <div className="flex gap-2">
+        {/* Dots */}
+        <div className="flex justify-center gap-1.5 sm:gap-2">
           {Array.from({ length: totalSections }).map((_, index) => (
             <button
               key={index}
@@ -39,27 +43,28 @@ export function NavigationControls({
               className={cn(
                 "w-2 h-2 rounded-full transition-all duration-300",
                 currentSection === index
-                  ? "bg-linear-to-r from-rose-500 to-rose-600"
-                  : "bg-rose-500/20 hover:bg-rose-500/30"
+                  ? "bg-gradient-to-r from-rose-500 to-rose-600"
+                  : "bg-rose-500/20 hover:bg-rose-500/40"
               )}
             />
           ))}
         </div>
 
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={onNext}
-          disabled={currentSection === totalSections - 1}
-          className={cn(
-            "rounded-full w-12 h-12 transition-all duration-200 bg-linear-to-br from-rose-500 to-rose-600 backdrop-blur-xs border border-rose-500/10",
-            currentSection === totalSections - 1
-              ? "opacity-50"
-              : "hover:bg-rose-500/20"
-          )}
-        >
-          <ChevronRight className="h-6 w-6" />
-        </Button>
+        {/* Next Button */}
+        <div className="flex justify-end">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onNext}
+            disabled={currentSection === totalSections - 1}
+            className={cn(
+              "flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full transition-all duration-200 bg-gradient-to-br from-rose-500 to-rose-600 backdrop-blur-xs border border-rose-500/10",
+              currentSection === totalSections - 1 ? "opacity-50" : "hover:opacity-80"
+            )}
+          >
+            <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
+          </Button>
+        </div>
       </div>
     </div>
   );

@@ -1,7 +1,6 @@
 function parsePoint(point: string) {
   const isNumbered = /^\d+\./.test(point);
   const isMainPoint = /^•/.test(point);
-  // Replace the Unicode property escape with a simpler emoji detection
   const emojiRegex = /[\u{1F300}-\u{1F9FF}]|[\u2600-\u26FF]/u;
   const hasEmoji = emojiRegex.test(point);
   const isEmpty = !point.trim();
@@ -9,21 +8,19 @@ function parsePoint(point: string) {
   return { isNumbered, isMainPoint, hasEmoji, isEmpty };
 }
 
+function parseEmojiPoint(content: string) {
+  const cleanContent = content.replace(/^[-]\s*/, "").trim();
+  const matches = cleanContent.match(/^(\p{Emoji}+)(.+)$/u);
+  if (!matches) return null;
 
-function parseEmojiPoint(content: string){
-    const cleanContent = content.replace(/^[-]\s*/, '').trim();
-
-    const matches = cleanContent.match(/^(\p{Emoji}+)(.+)$/u);
-    if(!matches) return null;
-
-    const [_, emoji, text] = matches;
-    return {
-        emoji: emoji.trim(),
-        text: text.trim(),
-    }
+  const [_, emoji, text] = matches;
+  return {
+    emoji: emoji.trim(),
+    text: text.trim(),
+  };
 }
 
-export default function ContenSection({
+export default function ContentSection({
   title,
   points,
 }: {
@@ -31,42 +28,28 @@ export default function ContenSection({
   points: string[];
 }) {
   return (
-    <div className="space-y-4">
+    <div className="space-y-3 sm:space-y-4">
       {points.map((point, index) => {
         const { isNumbered, isMainPoint, hasEmoji, isEmpty } =
           parsePoint(point);
 
-        const {emoji, text} = parseEmojiPoint(point) ?? {};
+        const { emoji, text } = parseEmojiPoint(point) ?? {};
 
-        if(isEmpty) return null;
+        if (isEmpty) return null;
 
-        if (hasEmoji || isMainPoint) {
-          return <div
-            key={`point-${index}`}
-            className="group relative bg-linear-to-br from-gray-200/[0.08] to-gray-400/[0.03] p-4 rounded-2xl border border-gray-500/10 hover:shadow-lg transition-all"
-          >
-            <div
-              className="absolute inset-0 bg-linear-to-r from-gray-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"
-            />
-            <div className="relative flex items-start gap-3">
-              <span className="text-lg lg:text-xl shrink-0 pt-1">{emoji}</span>
-              <p className="text-lg lg:text-xl text-muted-foreground/90 leading-relaxed">
-                {text}
-              </p>
-            </div>
-          </div>
-        }
         return (
           <div
             key={`point-${index}`}
-            className="group relative bg-linear-to-br from-gray-200/[0.08] to-gray-400/[0.03] p-4 rounded-2xl border border-gray-500/10 hover:shadow-lg transition-all"
+            className="group relative bg-linear-to-br from-gray-200/[0.08] to-gray-400/[0.03] p-3 sm:p-4 rounded-xl sm:rounded-2xl border border-gray-500/10 hover:shadow-lg transition-all"
           >
-            <div
-              className="absolute inset-0 bg-linear-to-r from-gray-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"
-            />
-            <div className="relative flex items-start gap-3">
-              <span className="text-lg lg:text-xl shrink-0 pt-1">{emoji}</span>
-              <p className="text-lg lg:text-xl text-muted-foreground/90 leading-relaxed">
+            <div className="absolute inset-0 bg-linear-to-r from-gray-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl sm:rounded-2xl" />
+            <div className="relative flex items-start gap-2 sm:gap-3">
+              {emoji && (
+                <span className="text-base sm:text-lg lg:text-xl shrink-0 pt-0.5 sm:pt-1">
+                  {emoji}
+                </span>
+              )}
+              <p className="text-sm sm:text-base lg:text-xl text-muted-foreground/90 leading-snug sm:leading-relaxed">
                 {text}
               </p>
             </div>
