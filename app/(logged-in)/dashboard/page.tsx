@@ -26,7 +26,7 @@ export default async function DashboardPage() {
       <BgGradient className="bg-background" />
       <div className="container mx-auto flex flex-col gap-4">
         <div className="px-2 py-12 sm:py-24">
-          <div className="flex gap-4 mb-8 justify-between">
+          <div className="flex gap-4 mb-8 justify-between items-center">
             <div className="flex flex-col gap-6">
               <MotionH1 
               variants={itemVariants}
