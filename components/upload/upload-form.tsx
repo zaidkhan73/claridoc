@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { useUploadThing } from "@/utils/uploadthing";
 import { error } from "console";
 import { generatePdfSummary } from "@/utils/generate-pdf";
-import { id } from "zod/locales";
+
 import { useRef, useState } from "react";
 import { storePdfSummary } from "@/utils/generate-pdf";
 import { useRouter } from "next/navigation";

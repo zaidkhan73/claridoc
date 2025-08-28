@@ -3,7 +3,7 @@
 import { getDbConnection } from "@/lib/db"
 import { currentUser } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
-import { success } from "zod";
+
 
 export async function deleteSummary({summaryId}:{summaryId: string}){
     try {
