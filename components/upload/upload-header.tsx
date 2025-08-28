@@ -9,7 +9,7 @@ export default function UploadHeader(){
           <MotionDiv variants={itemVariants} className="relative p-[1px] overflow-hidden rounded-full bg-linear-to-r from-rose-200 via-rose-500 to-rose-800 animate-gradient-x group">
             <Badge
               variant={"secondary"}
-              className="relative px-6 py-2 text-base font-medium bg-background rounded-full group-hover:bg-gray-50 transition-colors"
+              className="relative px-6 py-2 text-base font-medium bg-background rounded-full hover:bg-secondary-foreground hover:text-background    transition-colors"
             >
               <Sparkles className="h-6 w-6 mr-2 text-rose-600 animate-pulse" />
               <span className="text-base">AI Powered Content Creation</span>

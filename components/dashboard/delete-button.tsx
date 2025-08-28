@@ -56,14 +56,14 @@ export default function DeleteButton({summaryId}: DeleteButtonProps) {
         <DialogFooter>
           <Button
             variant="ghost"
-            className=" bg-gray-50 border border-gray-200 hover:text-gray-600 hover:bg-gray-100"
+            className=" bg-background border border-gray-200 hover:text-foreground hover:bg-gray-100"
             onClick={()=> setOpen(false)}
           >
             cancel
           </Button>
           <Button
             variant="destructive"
-            className=" bg-gray-900 hover:bg-gray-600"
+            className=" bg-gray-900 border-gray-200 hover:text-foreground hover:bg-gray-100"
             onClick={handleDelete}
           >
             {isPending ? 'Deleting...' : 'Delete'}

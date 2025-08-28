@@ -46,7 +46,7 @@ export default function HeroSection() {
           {/* Button content */}
           
           <Link
-            href="/sign-in"
+            href="/upload"
             className="relative z-10 flex gap-2 items-center hover:no-underline"
           >
             <span>Try ClariDoc</span>
