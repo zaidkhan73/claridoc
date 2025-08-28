@@ -1,22 +1,44 @@
 "use client";
+import { useState, useEffect } from "react";
 import { FileText, Menu, X } from "lucide-react";
 import NavLink from "./nav-link";
 import { UserButton, SignedIn, SignedOut } from "@clerk/nextjs";
-import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true); // for scroll hide/show
+  const [lastScroll, setLastScroll] = useState(0);
   const pathname = usePathname();
 
-  // 👉 Jab bhi pathname change hoga (page load ya route change), menu close ho jaayega
+  // Close mobile menu on route change
+  useEffect(() => setIsOpen(false), [pathname]);
+
+  // Scroll hide/show effect
   useEffect(() => {
-    setIsOpen(false);
-  }, [pathname]);
+    const handleScroll = () => {
+      const currentScroll = window.scrollY;
+      if (currentScroll > lastScroll && currentScroll > 50) {
+        // scrolling down
+        setIsVisible(false);
+      } else {
+        // scrolling up
+        setIsVisible(true);
+      }
+      setLastScroll(currentScroll);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScroll]);
 
   return (
-    <nav className="bg-background border-b border-border shadow-sm transition-colors duration-300">
+    <nav
+      className={`bg-background border-b border-border shadow-sm transition-transform duration-300 fixed top-0 left-0 right-0 z-50 ${
+        isVisible ? "translate-y-0" : "-translate-y-full"
+      }`}
+    >
       <div className="container flex items-center justify-between py-4 lg:py-6 lg:px-8 mx-auto">
         {/* Left logo */}
         <div className="flex items-center lg:flex-1">
@@ -28,18 +50,21 @@ export default function Header() {
           </NavLink>
         </div>
 
-        {/* Hamburger button for mobile */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="lg:hidden p-2 rounded-md border border-border bg-background shadow-sm text-foreground hover:bg-primary hover:text-primary-foreground transition-colors duration-300 ease-in-out focus:outline-none"
-        >
-          <span className="sr-only">Toggle menu</span>
-          {isOpen ? (
-            <X className="w-7 h-7 transition-transform duration-300 ease-in-out rotate-90" />
-          ) : (
-            <Menu className="w-7 h-7 transition-transform duration-300 ease-in-out rotate-0" />
-          )}
-        </button>
+        {/* Mobile right controls */}
+        <div className="flex items-center gap-2 lg:hidden">
+          <ThemeToggle />
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="p-2 rounded-md border border-border bg-background shadow-sm text-foreground hover:bg-primary hover:text-primary-foreground transition-colors duration-300 ease-in-out focus:outline-none"
+          >
+            <span className="sr-only">Toggle menu</span>
+            {isOpen ? (
+              <X className="w-7 h-7 transition-transform duration-300 ease-in-out rotate-90" />
+            ) : (
+              <Menu className="w-7 h-7 transition-transform duration-300 ease-in-out rotate-0" />
+            )}
+          </button>
+        </div>
 
         {/* Desktop menu */}
         <div className="hidden lg:flex gap-5 items-center">
@@ -47,10 +72,7 @@ export default function Header() {
             Pricing
           </NavLink>
           <SignedIn>
-            <NavLink
-              href="/dashboard"
-              className="capitalize hover:text-primary transition-colors"
-            >
+            <NavLink href="/dashboard" className="capitalize hover:text-primary transition-colors">
               Your Summary
             </NavLink>
           </SignedIn>
@@ -108,9 +130,6 @@ export default function Header() {
             Sign In
           </NavLink>
         </SignedOut>
-        <div className="flex justify-start">
-          <ThemeToggle />
-        </div>
       </div>
     </nav>
   );

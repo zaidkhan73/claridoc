@@ -45,7 +45,7 @@ export default async function DashboardPage() {
             </Button>
           </div>
           <div className="mb-6">
-            <div className="bg-rose-50 border border-rose-200 rounded-lg p-4 text-rose-800">
+            <div className="bg-secondary border border-rose-200 rounded-lg p-4 text-seconday-foreground">
               <p className="text-sm">
                 You've reached the limit of {uploadLimit} uploads on the Basic
                 Plan.{" "}

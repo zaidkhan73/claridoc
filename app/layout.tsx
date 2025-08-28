@@ -33,7 +33,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <div>
+            <div className="p-12 flex items-center justify-end">
               <Header/>
             </div>
             <main>{children}</main>
