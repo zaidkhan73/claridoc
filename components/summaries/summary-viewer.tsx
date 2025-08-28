@@ -37,8 +37,10 @@ export default function SummaryViewer({ summary }: { summary: string }) {
   };
 
   return (
-    <Card className="relative px-2 h-[500px] sm:h-[600px] lg:h-[620px] w-full xl:w-[600px] overflow-hidden bg-gradient-to-br from-background via-background/95 to-rose-500/50 backdrop-blur-lg shadow-2xl rounded-3xl border border-rose-500/10
-    ">
+    <Card
+  className="relative px-2 h-[500px] sm:h-[600px] lg:h-[620px] w-full xl:w-[600px] overflow-hidden bg-gradient-to-br from-background via-background/95 to-rose-500/30 backdrop-blur-lg shadow-2xl rounded-3xl border border-rose-500/10
+    "
+>
       <ProgressBar sections={sections} currentSection={currentSection} />
 
       <MotionDiv key={currentSection} 

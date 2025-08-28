@@ -13,6 +13,7 @@ import { storePdfSummary } from "@/utils/generate-pdf";
 import { useRouter } from "next/navigation";
 import { MotionDiv } from "../common/motion-wrapper";
 import { itemVariants } from "@/utils/constants";
+import LoadingSkeleton from "./loading-skeleton";
 
 const schema = z.object({
   file: z
@@ -118,7 +119,7 @@ export default function UploadForm() {
         onSubmit={handleSubmit}
       />
       {isLoading && (
-        <>
+        <div className="flex flex-col gap-4 items-center">
         <div className="relative">
           <div className="absolute inset-0 flex items-center"
           aria-hidden="true">
@@ -130,7 +131,8 @@ export default function UploadForm() {
             </span>
           </div>
         </div>
-        </>
+        <LoadingSkeleton/>
+        </div>
       )}
     </MotionDiv>
   );
