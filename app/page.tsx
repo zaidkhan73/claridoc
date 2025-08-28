@@ -17,7 +17,6 @@ export default function Home() {
       <HeroSection/>
       <DemoSection/>
       <HowItWorksSection/>
-      <PricingSection/>
       <CtaSection/>
       </div>
 

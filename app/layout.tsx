@@ -5,6 +5,9 @@ import Header from "@/components/common/header";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "sonner";
 import { ThemeProvider } from "@/components/theme/theme-provider";
+import { dark, neobrutalism, shadesOfPurple ,shadcn } from '@clerk/themes'
+
+
 
 const fontSans = FontSans({
   variable: "--font-sans",
@@ -21,17 +24,21 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      appearance={{
+        theme: shadcn
+      }}
+    >
       <html lang="en" suppressHydrationWarning>
         <body
           className={`${fontSans.variable} font-sans antialiased`}
         >
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            defaultTheme="dark"
             enableSystem
-            disableTransitionOnChange
           >
             <div className="p-12 flex items-center justify-end">
               <Header/>

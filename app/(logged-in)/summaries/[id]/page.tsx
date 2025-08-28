@@ -1,4 +1,5 @@
 import BgGradient from "@/components/common/bg-gradient";
+import { MotionDiv } from "@/components/common/motion-wrapper";
 import SourceInfo from "@/components/summaries/source-info";
 import SummaryHeader from "@/components/summaries/summary-header";
 import SummaryViewer from "@/components/summaries/summary-viewer";
@@ -30,13 +31,17 @@ export default async function SummaryPage(props: {
       <div className="container mx-auto flex flex-col gap-4 px-3 sm:px-6 lg:px-8 py-4 sm:py-8">
         
         {/* Header */}
-        <div className="flex flex-col">
+        <MotionDiv 
+        initial={{opacity:0, y:20}}
+        animate={{opacity:1, y:0}}
+        transition={{duration:0.5}}
+        className="flex flex-col">
           <SummaryHeader
             title={displayTitle}
             createdAt={createdAt}
             readingTime={readingTime}
           />
-        </div>
+        
 
         {/* File Info */}
         {file_name && (
@@ -50,7 +55,11 @@ export default async function SummaryPage(props: {
         )}
 
         {/* Summary Card */}
-        <div className="relative mt-4 sm:mt-8">
+        <MotionDiv 
+        initial={{opacity:0, y:20}}
+        animate={{opacity:1, y:0}}
+        transition={{duration:0.5}}
+        className="relative mt-4 sm:mt-8">
           <div
             className="relative p-3 sm:p-6 lg:p-8 bg-background/80 backdrop-blur-md rounded-xl sm:rounded-2xl shadow-lg border border-rose-100/30 transition-all duration-300 hover:shadow-xl hover:bg-background/90 max-w-4xl mx-auto w-full"
           >
@@ -72,7 +81,8 @@ export default async function SummaryPage(props: {
               <SummaryViewer summary={summary.summary_text} />
             </div>
           </div>
-        </div>
+        </MotionDiv>
+        </MotionDiv>
       </div>
     </div>
   );

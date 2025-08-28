@@ -1,8 +1,54 @@
+'use client'
 import { Pizza } from "lucide-react";
+import { MotionDiv, MotionH3, MotionSection } from "../common/motion-wrapper";
+import SummaryViewer from "../summaries/summary-viewer";
+
+const demo_summary = `
+#Quick Overview
+-Summarize PDFs instantly with AI.
+-Extracts the most important insights in seconds.
+-Saves time by avoiding long manual reading.
+
+#How It Works
+-Upload your PDF directly on the website.
+-Our AI scans and analyzes the content.
+-You get a clean, concise summary in one click.
+
+#Key Features
+-Accurate, AI-powered summaries.
+-Supports multiple PDF sizes and formats.
+-Highlight important keywords and sections.
+
+#Why Choose Us?
+
+-Faster than reading full documents.
+-Easy to use — no technical skills required.
+-Helps students, researchers, and professionals a like.
+
+#Use Cases
+-Students → Summarize study material quickly.
+-Researchers → Scan long papers efficiently.
+-Professionals → Review reports and contracts faster.
+
+#User Experience
+-Clean, distraction-free interface.
+-Dark/light mode for comfortable reading.
+-Mobile-friendly and responsive design.
+
+#Privacy & Security
+-Your PDFs are processed safely.
+-No long-term storage of uploaded files.
+-100% secure and encrypted.
+
+#Final Thoughts
+-Stay ahead with faster learning.
+-Simplify your workflow effortlessly.
+-Try ClariDoc today and save your valuable time. 🚀`
 
 export default function DemoSection() {
   return (
-    <section className="relative">
+    <MotionSection 
+    className="relative">
       <div className="py-12 lg:py-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 lg:pt-12">
         <div
           aria-hidden="true"
@@ -17,21 +63,34 @@ export default function DemoSection() {
           />
         </div>
         <div className="flex flex-col items-center text-center space-y-4">
-          <div className="inline-flex items-center justify-center p-2 rounded-2xl bg-gray-100/80 backdrop-blur-xs border border-gray-500/20 mb-4">
+          <MotionDiv
+          initial={{y:-20, opacity:0}}
+          whileInView={{y:0, opacity:1}} 
+          transition={{duration:0.8, delay:0.2}}
+          className="inline-flex items-center justify-center p-2 rounded-2xl bg-gray-100/80 backdrop-blur-xs border border-gray-500/20 mb-4">
             <Pizza className="w-6 h-6 text-rose-500" />
-          </div>
+          </MotionDiv>
           <div className="text-center mb-16">
-          <h3 className="font-bold text-3xl max-w-2xl mx-auto px-4 sm:px-6">
+          <MotionH3
+          initial={{y:20, opacity:0}}
+          whileInView={{y:0, opacity:1}}
+          transition={{duration:0.8, delay:0.2}}
+          className="font-bold text-3xl max-w-2xl mx-auto px-4 sm:px-6">
             Watch how ClariDoc transforms{" "}
             <span className="bg-linear-to-r from-rose-500 to-rose-700 bg-clip-text text-transparent">
               this Next.js course PDF
             </span>{" "}
             into an easy-to-read summary!
-          </h3>
+          </MotionH3>
           </div>
-          <div className="flex justify-center items-center px-2 sm:px-4 lg:px-6"></div>
+          <div className="flex justify-center items-center px-2 sm:px-4 lg:px-6">
+            <MotionDiv initial={{opacity:0}} whileInView={{opacity:1}} transition={{duration:0.8, delay:0.2}}>
+              <SummaryViewer summary={demo_summary}/>
+            </MotionDiv>
+            
+          </div>
         </div>
       </div>
-    </section>
+    </MotionSection>
   );
 }

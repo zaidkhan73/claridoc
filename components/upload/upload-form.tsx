@@ -11,6 +11,8 @@ import { id } from "zod/locales";
 import { useRef, useState } from "react";
 import { storePdfSummary } from "@/utils/generate-pdf";
 import { useRouter } from "next/navigation";
+import { MotionDiv } from "../common/motion-wrapper";
+import { itemVariants } from "@/utils/constants";
 
 const schema = z.object({
   file: z
@@ -93,7 +95,7 @@ export default function UploadForm() {
           });
           toast('summary stored in db')
           console.log("store result: ",storeResult)
-          //router.push(`/summaries/${storeResult.data.id}`)
+          router.push(`/summaries/${storeResult.data.id}`)
         }
         
       }
@@ -109,12 +111,27 @@ export default function UploadForm() {
     }
   };
   return (
-    <div className="flex flex-col gap-8 w-full max-w-2xl mx-auto">
+    <MotionDiv variants={itemVariants} className="flex flex-col gap-8 w-full max-w-2xl mx-auto">
       <UploadFormInput
         isLoading={isLoading}
         ref={formRef}
         onSubmit={handleSubmit}
       />
-    </div>
+      {isLoading && (
+        <>
+        <div className="relative">
+          <div className="absolute inset-0 flex items-center"
+          aria-hidden="true">
+            <div className="w-full border-t border-foreground/50 dark:border-foreground/10" />
+          </div>
+          <div className="relative flex justify-center">
+            <span className="bg-background px-3 py-2 rounded-full text-muted-foreground text-sm">
+              Processing...
+            </span>
+          </div>
+        </div>
+        </>
+      )}
+    </MotionDiv>
   );
 }

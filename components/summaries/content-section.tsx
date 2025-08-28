@@ -1,3 +1,6 @@
+import { containerVariants, itemVariants } from "@/utils/constants";
+import { MotionDiv } from "../common/motion-wrapper";
+
 function parsePoint(point: string) {
   const isNumbered = /^\d+\./.test(point);
   const isMainPoint = /^•/.test(point);
@@ -28,17 +31,22 @@ export default function ContentSection({
   points: string[];
 }) {
   return (
-    <div className="space-y-3 sm:space-y-4">
+    <MotionDiv variants={containerVariants}
+    key={points.join('')}
+    initial="hidden"
+    animate="visible"
+    exit="exit"
+    className="space-y-3 sm:space-y-4">
       {points.map((point, index) => {
-        const { isNumbered, isMainPoint, hasEmoji, isEmpty } =
-          parsePoint(point);
-
-        const { emoji, text } = parseEmojiPoint(point) ?? {};
-
+        const { isEmpty } = parsePoint(point);
         if (isEmpty) return null;
 
+        const parsed = parseEmojiPoint(point);
+        const emoji = parsed?.emoji;
+        const text = parsed?.text ?? point; // fallback if no emoji found
+
         return (
-          <div
+          <MotionDiv variants={itemVariants}
             key={`point-${index}`}
             className="group relative bg-linear-to-br from-gray-200/[0.08] to-gray-400/[0.03] p-3 sm:p-4 rounded-xl sm:rounded-2xl border border-gray-500/10 hover:shadow-lg transition-all"
           >
@@ -53,9 +61,9 @@ export default function ContentSection({
                 {text}
               </p>
             </div>
-          </div>
+          </MotionDiv>
         );
       })}
-    </div>
+    </MotionDiv>
   );
 }

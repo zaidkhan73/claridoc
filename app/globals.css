@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "uploadthing/tw/v4";
+@import '@clerk/themes/shadcn.css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -150,6 +151,19 @@
 
 .animate-gradient-x{
   animation: gradient-x 3s ease infinite
+}
+
+/* Smooth color + opacity transitions */
+html.theme-transition, 
+html.theme-transition body, 
+html.theme-transition [class*="bg-"], 
+html.theme-transition [class*="text-"], 
+html.theme-transition [class*="border-"], 
+html.theme-transition [class*="opacity-"] {
+  transition: background-color 1s ease,
+              color 1s ease,
+              border-color 1s ease,
+              opacity 1s ease;
 }
 
 

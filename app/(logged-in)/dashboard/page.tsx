@@ -7,6 +7,8 @@ import { ArrowRight, Plus, Upload } from "lucide-react";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import EmptyState from "@/components/dashboard/empty-summary-state";
+import { MotionH1, MotionP } from "@/components/common/motion-wrapper";
+import { itemVariants } from "@/utils/constants";
 
 export default async function DashboardPage() {
   const user = await currentUser();
@@ -25,13 +27,21 @@ export default async function DashboardPage() {
       <div className="container mx-auto flex flex-col gap-4">
         <div className="px-2 py-12 sm:py-24">
           <div className="flex gap-4 mb-8 justify-between">
-            <div className="flex flex-col gap-2">
-              <h1 className="text-4xl font-bold tracking-tight bg-linear-to-r from-rose-900 to-rose-400 bg-clip-text text-transparent">
+            <div className="flex flex-col gap-6">
+              <MotionH1 
+              variants={itemVariants}
+              initial="hidden"
+              animate="visible"
+              className="text-4xl font-bold tracking-tight bg-linear-to-r from-rose-900 to-rose-400 bg-clip-text text-transparent">
                 Your Summaries
-              </h1>
-              <p className="text-gray-600">
+              </MotionH1>
+              <MotionP 
+              variants={itemVariants}
+              initial="hidden"
+              animate="visible"
+              className="text-gray-600">
                 Transform your PDFs into concise, actionable insights
-              </p>
+              </MotionP>
             </div>
             <Button
               variant={"link"}
@@ -43,22 +53,6 @@ export default async function DashboardPage() {
                 New Summary
               </Link>
             </Button>
-          </div>
-          <div className="mb-6">
-            <div className="bg-secondary border border-rose-200 rounded-lg p-4 text-seconday-foreground">
-              <p className="text-sm">
-                You've reached the limit of {uploadLimit} uploads on the Basic
-                Plan.{" "}
-                <Link
-                  href="/#pricing"
-                  className="text-rose-800 underline font-medium underline-offset-4 inline-flex items-center"
-                >
-                  Click here to upgrade to Pro{" "}
-                  <ArrowRight className="w-4 h-4 inline-block" /> For unlimited
-                  uploads
-                </Link>
-              </p>
-            </div>
           </div>
           {summaries.length === 0 ? (
             <EmptyState />

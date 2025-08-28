@@ -68,9 +68,6 @@ export default function Header() {
 
         {/* Desktop menu */}
         <div className="hidden lg:flex gap-5 items-center">
-          <NavLink href="/#pricing" className="capitalize hover:text-primary transition-colors">
-            Pricing
-          </NavLink>
           <SignedIn>
             <NavLink href="/dashboard" className="capitalize hover:text-primary transition-colors">
               Your Summary
@@ -80,9 +77,6 @@ export default function Header() {
             <NavLink href="/upload" className="capitalize rounded-md transition-colors">
               Upload a PDF
             </NavLink>
-            <span className="bg-accent text-accent-foreground text-xs font-bold px-2 py-1 rounded">
-              Pro
-            </span>
             <UserButton />
           </SignedIn>
           <SignedOut>
@@ -103,9 +97,6 @@ export default function Header() {
           isOpen ? "max-h-96 py-4" : "max-h-0 py-0"
         }`}
       >
-        <NavLink href="/#pricing" className="capitalize hover:text-primary transition-colors">
-          Pricing
-        </NavLink>
         <SignedIn>
           <NavLink href="/dashboard" className="capitalize hover:text-primary transition-colors">
             Your Summary
@@ -116,9 +107,6 @@ export default function Header() {
             Upload a PDF
           </NavLink>
           <div className="flex gap-2 items-center">
-            <span className="bg-accent text-accent-foreground text-xs font-bold px-2 py-1 rounded w-max">
-              Pro
-            </span>
             <UserButton />
           </div>
         </SignedIn>

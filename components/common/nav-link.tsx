@@ -23,7 +23,7 @@ export default function NavLink({
       href={href}
       onClick={onClick} // <-- handle click
       className={cn(
-        "transition-colors text-sm duration-300 text-gray-600 hover:text-rose-500",
+        "transition-colors text-sm duration-300 text-foreground/90 hover:text-rose-500",
         className,
         isActive && "text-rose-500"
       )}
