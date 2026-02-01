@@ -6,7 +6,7 @@ const ai = new GoogleGenerativeAI(GEMINI_API_KEY);
 
 export async function generateSummaryFromGeminiAI(pdfText: string) {
   try {
-    const model = ai.getGenerativeModel({ model: "gemini-2.0-flash-001" });
+    const model = ai.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
 
     // 🚀 Directly pass string instead of role/parts
     const response = await model.generateContent(
